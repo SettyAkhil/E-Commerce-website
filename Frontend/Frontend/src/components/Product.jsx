@@ -16,7 +16,7 @@ const Product = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/product/${id}`
+          `https://e-commerce-website-production-4a12.up.railway.app/api/product/${id}`
         );
         setProduct(response.data);
         if (response.data.imageName) {
@@ -29,7 +29,7 @@ const Product = () => {
 
     const fetchImage = async () => {
       const response = await axios.get(
-        `http://localhost:8080/api/product/${id}/image`,
+        `https://e-commerce-website-production-4a12.up.railway.app/api/product/${id}/image`,
         { responseType: "blob" }
       );
       setImageUrl(URL.createObjectURL(response.data));
@@ -38,18 +38,20 @@ const Product = () => {
     fetchProduct();
   }, [id]);
 
-  const deleteProduct = async () => {
-    try {
-      await axios.delete(`http://localhost:8080/api/product/${id}`);
-      removeFromCart(id);
-      console.log("Product deleted successfully");
-      alert("Product deleted successfully");
-      refreshData();
-      navigate("/");
-    } catch (error) {
-      console.error("Error deleting product:", error);
-    }
-  };
+ const deleteProduct = async () => {
+  try {
+    await axios.delete(
+      `https://e-commerce-website-production-4a12.up.railway.app/api/product/${id}`
+    );
+    removeFromCart(id);
+    console.log("Product deleted successfully");
+    alert("Product deleted successfully");
+    refreshData();
+    navigate("/");
+  } catch (error) {
+    console.error("Error deleting product:", error);
+  }
+};
 
   const handleEditClick = () => {
     navigate(`/product/update/${id}`);
